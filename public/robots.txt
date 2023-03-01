@@ -1,0 +1,3 @@
+User-Agent:*
+
+Sitemap:https://amidakuji.net/sitemap.xml
