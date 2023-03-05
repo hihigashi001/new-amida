@@ -1,3 +1,4 @@
+import { AllOpenButton } from "./AllOpenButton"
 import { Borders } from "./Borders"
 import { Modal } from "./Modal"
 import { Players } from "./Players"
@@ -12,6 +13,7 @@ export const AmidaBoard = () => {
         <Borders />
       </div>
       <Values />
+      <AllOpenButton />
     </div>
   )
 }

@@ -20,6 +20,7 @@ type Handlers = {
   modalClose: () => void
   changeText: (text: string) => void
   updatePlayer: () => void
+  updateAllPlayer: () => void
 }
 
 const initialValues: Store = {
@@ -73,6 +74,11 @@ export const useAmida = () => {
       mutate()
       statusStore.setState({ modalState: { isOpen: false, player: 0, text: "" } })
     },
+    updateAllPlayer: async () => {
+      const newAmidaData = { ...amidaData, amidaPlayers: allPlayers(amidaData) }
+      await updateAmida(pageId, newAmidaData)
+      mutate()
+    },
   }
 
   return { amidaData, modalState, handlers, error, loading: !data && !error, isModal: modalState.isOpen, isAmida }
@@ -92,4 +98,19 @@ function replaceAmidaPlayers(amidaValues: StoreData, modalValues: modalState): s
 
 function containsEmptyString(arr: string[]): boolean {
   return arr.includes("")
+}
+
+function allPlayers(amidaValues: StoreData): string[] {
+  const { amidaPlayers } = amidaValues
+
+  let newAmidaPlayers = []
+  for (let i = 0; i < amidaPlayers.length; i++) {
+    if (amidaPlayers[i] === "") {
+      newAmidaPlayers.push("-")
+    } else {
+      newAmidaPlayers.push(amidaPlayers[i])
+    }
+  }
+
+  return newAmidaPlayers
 }
