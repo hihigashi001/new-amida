@@ -20,6 +20,7 @@ export default function Document() {
           <meta property="og:locale" content="ja_JP" />
           <meta property="og:site_name" content="完全無料シンプルあみだくじオンラインサイト" />
           <meta property="og:image" content="https://amidakuji.net/amidakuji.png" />
+          <script data-ad-client="ca-pub-9679478765506731" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         </Head>
       <body>
         <Main />
