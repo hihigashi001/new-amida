@@ -2,7 +2,9 @@ import firebase from "firebase/compat/app"
 import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from "../lib/firebase"
 
-export const dataNow = () => firebase.firestore.Timestamp.fromDate(new Date())
+const now = new Date();
+now.setDate(now.getDate() + 7);
+export const nextWeek = () => firebase.firestore.Timestamp.fromDate(now)
 
 export type StoreData = {
   amidaTitle: string

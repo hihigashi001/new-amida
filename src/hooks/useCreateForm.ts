@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { addAmida, dataNow } from "@/lib/functions"
+import { addAmida, nextWeek } from "@/lib/functions"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 
@@ -35,7 +35,7 @@ export const useCreateForm = () => {
         amidaValues: createAmidaValues(values.amidaValues, values.amidaCount),
         amidaPlayers: createAmidaPlayers(values.amidaCount),
         amidaBorder: generateAmidaBorder(values.amidaCount),
-        expireDate: dataNow(),
+        expireDate: nextWeek(),
       })
       id ? router.push(`/user/${id}`) : alert("作成に失敗しました。")
     },
