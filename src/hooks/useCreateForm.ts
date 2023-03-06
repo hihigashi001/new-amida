@@ -12,7 +12,7 @@ type AmidaValues = {
 const initialValues: AmidaValues = {
   amidaTitle: "",
   amidaCount: 3,
-  amidaValues: ["当たり", "", "", "", "", "", "", "", "", ""],
+  amidaValues: [" 当たり", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 }
 
 const validationSchema = Yup.object({
