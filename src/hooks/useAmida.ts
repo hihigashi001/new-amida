@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { StoreData, getAmida, updateAmida } from "@/lib/functions"
+import { StoreData, getAmida, updateAmida } from "@/lib/apiClient"
 import useSWR from "swr"
 import { create } from "zustand"
 
@@ -16,9 +16,9 @@ type Store = {
 }
 
 type Handlers = {
+  changeText: (text: string) => void
   modalOpen: (number: number) => void
   modalClose: () => void
-  changeText: (text: string) => void
   updatePlayer: () => void
   updateAllPlayer: () => void
 }
@@ -37,7 +37,7 @@ const statusStore = create<Store>(() => initialValues)
 
 export const useAmida = () => {
   const { amidaData, modalState } = statusStore()
-  const [isAmida, SetIsAmida] = useState(true)
+  const [isAmidaCover, SetIsAmidaCover] = useState(true)
   const router = useRouter()
   const pageId = router.query.id as string
 
@@ -51,20 +51,20 @@ export const useAmida = () => {
 
   useEffect(() => {
     if (containsEmptyString(amidaData.amidaPlayers)) {
-      SetIsAmida(true)
+      SetIsAmidaCover(true)
     } else {
-      SetIsAmida(false)
+      SetIsAmidaCover(false)
     }
   }, [amidaData.amidaPlayers])
 
   const handlers: Handlers = {
-    modalOpen: (number: number) => {
+    modalOpen: (number) => {
       statusStore.setState({ modalState: { isOpen: true, player: number, text: "" } })
     },
     modalClose: () => {
       statusStore.setState({ modalState: { isOpen: false, player: 0, text: "" } })
     },
-    changeText: (text: string) => {
+    changeText: (text) => {
       if (text.length > 15) return
       statusStore.setState({ modalState: { ...modalState, text: text } })
     },
@@ -81,10 +81,10 @@ export const useAmida = () => {
     },
   }
 
-  return { amidaData, modalState, handlers, error, loading: !data && !error, isModal: modalState.isOpen, isAmida }
+  return { amidaData, modalState, handlers, error, loading: !data && !error, isAmidaCover }
 }
 
-// functions
+// this is a function that is not exported
 
 function replaceAmidaPlayers(amidaValues: StoreData, modalValues: modalState): string[] {
   const { amidaPlayers } = amidaValues

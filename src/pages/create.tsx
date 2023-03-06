@@ -1,7 +1,7 @@
 import { CreateForm } from "@/components/pages/create/CreateForm"
 import { Layout } from "@/components/parts/Layout"
 
-export default function Create() {
+export const Create = () => {
   const title = "あみだくじサイト | あみだくじ作成"
   const description = "あみだくじを作成するページです。"
   return (
@@ -11,3 +11,5 @@ export default function Create() {
     </Layout>
   )
 }
+
+export default Create

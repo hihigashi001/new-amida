@@ -1,7 +1,7 @@
 import { useAmida } from "@/hooks/useAmida"
 
 export const Borders = () => {
-  const { amidaData, isAmida } = useAmida()
+  const { amidaData, isAmidaCover } = useAmida()
 
   const colBorder = amidaData.amidaPlayers.length - 1
   const items = amidaData.amidaBorder.split("")
@@ -13,7 +13,7 @@ export const Borders = () => {
           return <div key={index} className={`grid-item ${item === "0" && "border-top-none"}`}></div>
         })}
       </div>
-      {isAmida && <div className="hidden-board">すべて選択されたらあみだが見れます。</div>}
+      {isAmidaCover && <div className="hidden-board">すべて選択されたらあみだが見れます。</div>}
     </div>
   )
 }

@@ -1,9 +1,9 @@
 import { useAmida } from "@/hooks/useAmida"
 
 export const Modal = () => {
-  const { modalState, isModal, handlers } = useAmida()
+  const { modalState, handlers } = useAmida()
 
-  if (!isModal) return null
+  if (!modalState.isOpen) return null
 
   return (
     <div>
@@ -12,7 +12,7 @@ export const Modal = () => {
           <span className="close" onClick={handlers.modalClose}>
             &times;
           </span>
-          <div className="form-item-text">15文字以内でお名前などを入力してください。</div>
+          <div className="modal-item-text">15文字以内でお名前などを入力してください。</div>
           <input autoFocus onChange={(e) => handlers.changeText(e.target.value)} value={modalState.text} />
           <div className="modal-buttons">
             <button onClick={handlers.modalClose} className="button-secondary">

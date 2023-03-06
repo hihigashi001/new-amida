@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { addAmida, nextWeek } from "@/lib/functions"
+import { addAmida, nextWeek } from "@/lib/apiClient"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 
@@ -11,8 +11,8 @@ type AmidaValues = {
 
 const initialValues: AmidaValues = {
   amidaTitle: "",
-  amidaCount: 5,
-  amidaValues: ["当たり", "x", "x", "x", "x", "x", "x", "x", "x", "x"],
+  amidaCount: 3,
+  amidaValues: ["当たり", "", "", "", "", "", "", "", "", ""],
 }
 
 const validationSchema = Yup.object({
@@ -56,13 +56,14 @@ export const useCreateForm = () => {
   return { ...formik, incrementAmidaCount, decrementAmidaCount }
 }
 
+// this is a function that is not exported
 // Functions: あみだくじを作る時の関数たち
 
 function zeros(num: number): string {
   return "0".repeat(num)
 }
 
-const replaceOnesWithZeros = (str: string): string => {
+function replaceOnesWithZeros(str: string): string {
   const arr = str.split("")
   let prevVal = "0"
   const newArr = arr.map((val) => {
@@ -77,7 +78,7 @@ const replaceOnesWithZeros = (str: string): string => {
   return newArr.join("")
 }
 
-const generateAmidaBorder = (count: number): string => {
+function generateAmidaBorder(count: number): string {
   const rowBorder = (count - 1) * 7
   let amidaBorder = zeros(count - 1)
   for (let i = 0; i < rowBorder; i++) {
@@ -88,12 +89,12 @@ const generateAmidaBorder = (count: number): string => {
   return amidaBorder
 }
 
-const createAmidaPlayers = (count: number): string[] => {
+function createAmidaPlayers(count: number): string[] {
   const arr = Array(count).fill("")
   return arr
 }
 
-const shuffleArray = (array: string[]): string[] => {
+function shuffleArray(array: string[]): string[] {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[array[i], array[j]] = [array[j], array[i]]
@@ -101,7 +102,7 @@ const shuffleArray = (array: string[]): string[] => {
   return array
 }
 
-const createAmidaValues = (values: string[], count: number): string[] => {
+function createAmidaValues(values: string[], count: number): string[] {
   const arr = values.slice(0, count)
   return shuffleArray(arr)
 }

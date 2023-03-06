@@ -5,7 +5,7 @@ import { useAmida } from "@/hooks/useAmida"
 const Amida = () => {
   const title = "あみだくじサイト | あみだくじ"
   const description = "あみだくじページです。"
-  const { amidaData, error, loading } = useAmida()
+  const { amidaData, error, loading, isAmidaCover } = useAmida()
 
   if (error) {
     return <Layout title={title} description={description}><div className="flex-center section-wrapper">Error...</div></Layout>
@@ -16,9 +16,11 @@ const Amida = () => {
   }
 
   const amidaTitle = amidaData.amidaTitle
+
   return (
     <Layout title={title} description={description}>
       <h2>あみだくじ {amidaTitle}</h2>
+      { isAmidaCover && <div className="amida-item-text">選択するボタンを押して、あみだくじを選んで♪</div> }
       <AmidaBoard />
     </Layout>
   )

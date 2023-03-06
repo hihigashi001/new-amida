@@ -14,7 +14,7 @@ export type StoreData = {
   expireDate?: firebase.firestore.Timestamp
 }
 
-export async function addAmida(data: StoreData) {
+export const addAmida = async (data: StoreData) => {
   try {
     const docRef = await addDoc(collection(db, "amidakuji"), data)
     return docRef.id
@@ -23,7 +23,7 @@ export async function addAmida(data: StoreData) {
   }
 }
 
-export async function updateAmida(id: string, data: StoreData) {
+export const updateAmida = async (id: string, data: StoreData) => {
   try {
     const usersCollection = collection(db, "amidakuji")
     const docRef = doc(usersCollection, id)
@@ -33,7 +33,7 @@ export async function updateAmida(id: string, data: StoreData) {
   }
 }
 
-export async function getAmida(id: string): Promise<StoreData> {
+export const getAmida = async (id: string): Promise<StoreData> => {
   try {
     const docRef = doc(db, "amidakuji", id)
     const docSnap = await getDoc(docRef)
