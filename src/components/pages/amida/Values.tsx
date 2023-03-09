@@ -11,7 +11,7 @@ export const Values = () => {
         {values.map((value, index) => {
           return (
             <div key={index} className="value-text">
-              {value}
+              {value ? value : "　"}
             </div>
           )
         })}
