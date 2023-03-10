@@ -8,6 +8,9 @@ export const CreateForm = () => {
     handleSubmit,
     handleChange,
     handleBlur,
+    changeValueAtari,
+    changeValueNumbers,
+    changeValueAllClear,
     errors,
     isSubmitting,
     touched,
@@ -47,8 +50,19 @@ export const CreateForm = () => {
       </section>
       <section className="form-item">
         <h3>アイテム編集</h3>
+        <div className="form-item-buttons">
+          <button type="button" onClick={changeValueAtari} className="count-button">
+            当たりを追加
+          </button>
+          <button type="button" onClick={changeValueNumbers} className="count-button">
+            1〜10を追加
+          </button>
+          <button type="button" onClick={changeValueAllClear} className="count-button">
+            入力値を全クリア
+          </button>
+        </div>
         <div className="form-item-text">
-          以下のアイテムを編集してください。あみだくじの下にアイテムがランダム順で表示されます。
+          または、以下のアイテムを編集してください。あみだくじの下にアイテムがランダム順で表示されます。
         </div>
         {values.amidaValues.map((amidaValue, index) => {
           return (

@@ -52,8 +52,20 @@ export const useCreateForm = () => {
       formik.setFieldValue("amidaCount", newCount)
     }
   }
+  const changeValueAtari = () => {
+    const newCount = addHit(formik.values)
+    formik.setFieldValue("amidaValues", newCount.amidaValues)
+  }
+  const changeValueNumbers = () => {
+    const newCount = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+    formik.setFieldValue("amidaValues", newCount)
+  }
+  const changeValueAllClear = () => {
+    const newCount = ["", "", "", "", "", "", "", "", "", ""]
+    formik.setFieldValue("amidaValues", newCount)
+  }
 
-  return { ...formik, incrementAmidaCount, decrementAmidaCount }
+  return { ...formik, incrementAmidaCount, decrementAmidaCount, changeValueAtari, changeValueNumbers, changeValueAllClear }
 }
 
 // this is a function that is not exported
@@ -105,4 +117,15 @@ function shuffleArray(array: string[]): string[] {
 function createAmidaValues(values: string[], count: number): string[] {
   const arr = values.slice(0, count)
   return shuffleArray(arr)
+}
+
+function addHit(initialValues: AmidaValues): AmidaValues {
+  const { amidaTitle, amidaCount, amidaValues } = initialValues
+  const index = amidaValues.findIndex((value) => value === "")
+  if (index !== -1) {
+    const newAmidaValues = [...amidaValues]
+    newAmidaValues[index] = "当たり"
+    return { amidaTitle, amidaCount, amidaValues: newAmidaValues }
+  }
+  return initialValues
 }
