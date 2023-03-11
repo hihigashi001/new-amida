@@ -9,6 +9,14 @@ type AmidaValues = {
   amidaValues: string[]
 }
 
+type Handlers = {
+  incrementAmidaCount: () => void
+  decrementAmidaCount: () => void
+  changeValueAtari: () => void
+  changeValueNumbers: () => void
+  changeValueAllClear: () => void
+}
+
 const initialValues: AmidaValues = {
   amidaTitle: "",
   amidaCount: 3,
@@ -40,32 +48,37 @@ export const useCreateForm = () => {
       id ? router.push(`/user/${id}`) : alert("作成に失敗しました。")
     },
   })
-  const incrementAmidaCount = () => {
-    const newCount = formik.values.amidaCount + 1
-    if (newCount <= 10) {
-      formik.setFieldValue("amidaCount", newCount)
-    }
-  }
-  const decrementAmidaCount = () => {
-    const newCount = formik.values.amidaCount - 1
-    if (newCount >= 2) {
-      formik.setFieldValue("amidaCount", newCount)
-    }
-  }
-  const changeValueAtari = () => {
-    const newCount = addHit(formik.values)
-    formik.setFieldValue("amidaValues", newCount.amidaValues)
-  }
-  const changeValueNumbers = () => {
-    const newCount = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-    formik.setFieldValue("amidaValues", newCount)
-  }
-  const changeValueAllClear = () => {
-    const newCount = ["", "", "", "", "", "", "", "", "", ""]
-    formik.setFieldValue("amidaValues", newCount)
+  const handlers: Handlers = {
+    incrementAmidaCount: () => {
+      const newCount = formik.values.amidaCount + 1
+      if (newCount <= 10) {
+        formik.setFieldValue("amidaCount", newCount)
+      }
+    },
+    decrementAmidaCount: () => {
+      const newCount = formik.values.amidaCount - 1
+      if (newCount >= 2) {
+        formik.setFieldValue("amidaCount", newCount)
+      }
+    },
+    changeValueAtari: () => {
+      const newCount = addHit(formik.values)
+      formik.setFieldValue("amidaValues", newCount.amidaValues)
+    },
+    changeValueNumbers: () => {
+      const newCount = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+      formik.setFieldValue("amidaValues", newCount)
+    },
+    changeValueAllClear: () => {
+      const newCount = ["", "", "", "", "", "", "", "", "", ""]
+      formik.setFieldValue("amidaValues", newCount)
+    },
   }
 
-  return { ...formik, incrementAmidaCount, decrementAmidaCount, changeValueAtari, changeValueNumbers, changeValueAllClear }
+  return {
+    ...formik,
+    ...handlers,
+  }
 }
 
 // this is a function that is not exported
